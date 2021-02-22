@@ -10,23 +10,23 @@ if(localStorage.getItem("todo")){
     displayMessages();
 }
 
-addButton.addEventListener("click", function(){
-    if(!addMessage.value) return;
-    let newTodo = {
-        todo: addMessage.value,
-        checked: false,
-        important: false
-    };
-
-    todoList.push(newTodo);
-    displayMessages();
-    localStorage.setItem("todo", JSON.stringify(todoList));
-    addMessage.value = '';
-    });
+        addButton.addEventListener("click", function(){
+        if(!addMessage.value) return;
+        let newTodo = {
+            todo: addMessage.value,
+            checked: false,
+            important: false
+        }
+  
+        todoList.push(newTodo);
+        displayMessages();
+        localStorage.setItem("todo", JSON.stringify(todoList));
+        addMessage.value = '';
+        });
 
     function displayMessages(){
         let displayMessage = "";
-        if(todoList.length === 0) todo.innerHTML= "";
+        if(todoList.length === 0) todo.innerHTML = "";
         todoList.forEach(function(item, i){
             displayMessage += `
             <li class="todo-item">
@@ -38,9 +38,16 @@ addButton.addEventListener("click", function(){
                 </div>
             </li>
             `;
+
             todo.innerHTML = displayMessage;
         })
-    }
+    }  
+
+    addMessage.addEventListener("keydown", (e) => {
+      if(e.keyCode === 13) {
+        addButton.click();
+      }
+   });
 
     todo.addEventListener("change", function(event){
         let idInput = event.target.getAttribute("id");
@@ -70,8 +77,3 @@ addButton.addEventListener("click", function(){
             }
         })
     });
-
-    
-
-    
-    
